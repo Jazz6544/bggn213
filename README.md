@@ -1,2 +1,2 @@
 # bggn213
-This repo is for my UCSD bioinformatics class. 
+My classwork from BGGN213 at UC San Diego (Fall 2023)
