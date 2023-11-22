@@ -1,0 +1,79 @@
+---
+title: "Lab 6 homework"
+author: "Jazz Zhang (A16149005)"
+format: pdf
+---
+
+```{r}
+# install.packages("bio3d")
+library(bio3d)
+```
+
+```{r}
+s1 <- read.pdb("4AKE") # kinase with drug
+s2 <- read.pdb("1AKE") # kinase no drug
+s3 <- read.pdb("1E4Y") # kinase with drug
+
+class(s1)
+
+?trim.pdb()
+
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA")
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+s1.plot <- plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor") 
+s2.plot <- plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor") 
+s3.plot <- plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+
+```
+
+Q1: pdb and sse
+
+Q2: it produce a new smaller PDB object, containing a subset of atoms, from a 
+given larger PDB object, according to input selection (in this case: chain A)
+
+Q3: top and bot (to turn off, both arguments should be set to "FALSE"), they 
+represent secondary structures (alpha helices and beta sheets)
+
+
+```{r}
+# code chunk completed with help from Alex Liu
+# Plot the s1 protein
+plotb3(s1.b, sse = s1.chainA, typ = "l", ylab = "Bfactor", top=FALSE, bot=FALSE)
+
+# stack s2 and s3 to the plot
+lines(s2.b, col = "red")
+lines(s3.b, col = "blue")
+
+# add legend
+legend("topright", legend = c("4AKE", "1AKE", "1E4Y"), col = c("black", "red", "blue"), lty = 1)
+```
+
+Q4: Instead of creating 3 separated plots, we can stack the lines representing 
+B-factor in the same plot so it's easier to compare. Also a dendrogram plot 
+could be made to compare similarity between each protein.
+
+```{r}
+hc <- hclust( dist( rbind(s1.b, s2.b, s3.b) ) )
+plot(hc)
+```
+
+Q5: protein s2 and s3 are similar to each other
+
+```{r}
+# function protein() for plotting B-factor of chain A from a give PDB file
+protein <- function(PDB){
+  s <- read.pdb(PDB) #read pdb files of protein of interest
+  s.chainA <- trim.pdb(s, chain="A", elety="CA") # extract chain A from protein 
+  s.b <- s.chainA$atom$b # extract B-factor of chain A of protein
+  plotb3(s.b, sse=s.chainA, typ="l", ylab="Bfactor") # plot B-factor
+}
+
+protein("4AKE")
+protein("1AKE")
+protein("1E4Y")
+
+```

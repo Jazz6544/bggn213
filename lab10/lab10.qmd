@@ -1,0 +1,78 @@
+---
+title: "Lab 10 (Structural Bioinformatics)"
+author: "Jazz Zhang (A16149005)"
+format: pdf
+---
+
+```{r}
+PDB_summary <- read.csv("Data Export Summary.csv", row.names = 1)
+
+rm.comma <- function(x){
+  as.numeric(gsub(",", "", x))
+}
+
+PDB_stats <- apply(PDB_summary, 2, rm.comma)
+rownames(PDB_stats) <- rownames(PDB_summary)
+```
+
+```{r}
+sum(PDB_stats[,"X.ray"])/sum(PDB_stats[,"Total"])
+sum(PDB_stats[,"EM"])/sum(PDB_stats[,"Total"])
+```
+
+Q1. 84.83% by X ray; 8.33% by EM
+
+```{r}
+PDB_stats["Protein (only)","Total"]/sum(PDB_stats[,"Total"])
+```
+
+Q2. 86.67%
+
+Q3. 211,377
+
+![](1HSG.png)
+
+Q4. Hydrogen's not displayed because the atom size is smaller than 2A 
+(resolution of the structure)
+
+Q5. 308
+
+![](1HSG(H2O308).png)
+
+Q6. ![](1HSG(rep).png)
+
+```{r}
+library(bio3d)
+
+pdb <- read.pdb("1hsg")
+pdb
+```
+
+Q7. 198
+
+Q8. HOH; MK1
+
+Q9. 2
+
+```{r}
+attributes(pdb)
+```
+
+```{r}
+head(pdb$atom)
+```
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+```{r}
+m <- nma(adk)
+plot(m)
+```
+
+```{r}
+mktrj(m, file="adk_m7.pdb")
+```
+

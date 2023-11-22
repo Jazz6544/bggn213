@@ -1,0 +1,229 @@
+---
+title: "Class 5: Data Visualization (ggplot)"
+author: "Jazz Zhang (A16149005)"
+format: pdf
+---
+
+```{r}
+library(tinytex)
+```
+
+## Using GGPLOT
+
+To use ggplot2 we first need to install it on our computers. To do this we will use the function `install.packages()`.
+
+```{r}
+library(ggplot2)
+ggplot(cars)
+```
+```{r}
+head(cars)
+```
+
+```{r}
+plot(cars)
+```
+ggplot:
+-data(data.frame for plotting)
+-aesthetics (aes() values - how to map data)
+-geom (type of plot)
+
+```{r}
+ggplot(cars)+
+  aes(x=speed, y=dist)+
+  geom_point()+
+  geom_smooth(method="lm")
+```
+
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+
+nrow(genes)
+ncol(genes)
+table(genes$State)
+round( table(genes$State)/nrow(genes) * 100, 2 )
+```
+5196 rows, 4 columns, 127 up-regulated genes, 2.44% up-regulated
+
+```{r}
+ggplot(genes) + 
+    aes(x=Condition1, y=Condition2) +
+    geom_point()
+```
+
+```{r}
+p <- ggplot(genes) + 
+    aes(x=Condition1, y=Condition2, col=State) +
+    geom_point()
+p
+```
+
+```{r}
+p + 
+  scale_colour_manual( values=c("blue","gray","red") )+
+  labs(title="Gene expression changes upon drug treatment", x="Control (no Drug)", y="Drug Treatment")
+```
+
+```{r}
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+gapminder <- read.delim(url)
+
+library(dplyr)
+gapminder_2007 <- gapminder %>% filter(year==2007)
+head(gapminder_2007)
+
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp) +
+  geom_point()
+```
+
+```{r}
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp) +
+  geom_point(alpha=0.5)
+```
+
+```{r}
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp, color=continent, size=pop) +
+  geom_point(alpha=0.5)
+```
+
+```{r}
+ggplot(gapminder_2007) + 
+  aes(x = gdpPercap, y = lifeExp, color = pop) +
+  geom_point(alpha=0.8)
+```
+
+```{r}
+ggplot(gapminder_2007) + 
+  aes(x = gdpPercap, y = lifeExp, size = pop) +
+  geom_point(alpha=0.5)
+```
+```{r}
+ggplot(gapminder_2007) + 
+  geom_point(aes(x = gdpPercap, y = lifeExp,
+                 size = pop), alpha=0.5) + 
+  scale_size_area(max_size = 10)
+```
+
+```{r}
+gapminder_1957 <- gapminder %>% filter(year==1957)
+head(gapminder_1957)
+
+ggplot(gapminder_1957) + 
+  aes(x = gdpPercap, y = lifeExp, color = continent, size = pop) +
+  geom_point(alpha=0.7) + 
+  scale_size_area(max_size = 15) +
+  facet_wrap(~year)
+```
+
+```{r}
+gapminder_1957_2007 <- gapminder %>% filter(year==1957 | year==2007)
+head(gapminder_1957_2007)
+
+ggplot(gapminder_1957_2007) + 
+  aes(x = gdpPercap, y = lifeExp, color = continent, size = pop) +
+  geom_point(alpha=0.7) + 
+  scale_size_area(max_size = 15) +
+  facet_wrap(~year)
+```
+
+```{r}
+gapminder_top5 <- gapminder %>% 
+  filter(year==2007) %>% 
+  arrange(desc(pop)) %>% 
+  top_n(5, pop)
+
+gapminder_top5
+```
+```{r}
+ggplot(gapminder_top5) + 
+  geom_col(aes(x = country, y = pop))
+```
+
+```{r}
+ggplot(gapminder_top5) + 
+  geom_col(aes(x = country, y = pop, fill = continent))
+```
+
+```{r}
+ggplot(gapminder_top5) + 
+  geom_col(aes(x = country, y = pop, fill = lifeExp))
+```
+
+```{r}
+ggplot(gapminder_top5) +
+  aes(x=country, y=pop, fill=gdpPercap) +
+  geom_col()
+```
+
+```{r}
+ggplot(gapminder_top5) +
+  aes(x=reorder(country, -pop), y=pop, fill=gdpPercap) +
+  geom_col()
+```
+
+```{r}
+ggplot(gapminder_top5) +
+  aes(x=reorder(country, -pop), y=pop, fill=country) +
+  geom_col(col="gray30") +
+  guides(fill="none")
+```
+
+```{r}
+head(USArrests)
+```
+
+```{r}
+USArrests$State <- rownames(USArrests)
+
+ggplot(USArrests) +
+  aes(x=reorder(State,Murder), y=Murder) +
+  geom_col() +
+  coord_flip()
+```
+```{r}
+ggplot(USArrests) +
+  aes(x=reorder(State,Murder), y=Murder) +
+  geom_point() +
+  geom_segment(aes(x=State, 
+                   xend=State, 
+                   y=0, 
+                   yend=Murder), color="blue") +
+  coord_flip()
+```
+
+
+```{r}
+#| eval: false
+library(gapminder)
+library(gganimate)
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # gganimate
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  shadow_wake(wake_length = 0.1, alpha = FALSE)
+```
+
+```{r}
+library(patchwork)
+
+p1 <- ggplot(mtcars) + geom_point(aes(mpg, disp))
+p2 <- ggplot(mtcars) + geom_boxplot(aes(gear, disp, group = gear))
+p3 <- ggplot(mtcars) + geom_smooth(aes(disp, qsec))
+p4 <- ggplot(mtcars) + geom_bar(aes(carb))
+
+(p1 | p2 | p3) / p4
+```
+
+
+

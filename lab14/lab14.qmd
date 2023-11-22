@@ -1,0 +1,216 @@
+---
+title: "Lab 14 Pathway Analysis from RNA-Seq Results"
+author: "Jazz Zhang (A16149005)"
+format: pdf
+---
+
+### Differential expression analysis
+
+```{r}
+#| message: false
+#| warning: false
+library(DESeq2)
+```
+
+```{r}
+metaFile <- "GSE37704_metadata.csv"
+countFile <- "GSE37704_featurecounts.csv"
+
+colData = read.csv(metaFile, row.names=1)
+head(colData)
+
+countData = read.csv(countFile, row.names=1)
+head(countData)
+```
+
+```{r}
+countData <- as.matrix(countData[,-1])
+head(countData)
+```
+
+```{r}
+countData = countData[rowSums(countData==0)<ncol(countData), ]
+head(countData)
+```
+
+```{r}
+dds = DESeqDataSetFromMatrix(countData=countData,
+                             colData=colData,
+                             design=~condition)
+dds = DESeq(dds)
+dds
+
+res = results(dds)
+summary(res)
+```
+
+```{r}
+plot( res$log2FoldChange, -log(res$padj) )
+```
+
+```{r}
+# Make a color vector for all genes
+mycols <- rep("gray", nrow(res) )
+
+# Color red the genes with absolute fold change above 2
+mycols[ abs(res$log2FoldChange) > 2 ] <- "red"
+
+# Color blue those with adjusted p-value less than 0.01
+#  and absolute fold change more than 2
+inds <- (res$padj < 0.01) & (abs(res$log2FoldChange) > 2 )
+mycols[ inds ] <- "blue"
+
+plot( res$log2FoldChange, -log(res$padj), col=mycols, 
+      xlab="Log2(FoldChange)", 
+      ylab="-Log(P-value)" )
+```
+
+```{r}
+#| message: false
+#| warning: false
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+
+columns(org.Hs.eg.db)
+
+res$symbol = mapIds(org.Hs.eg.db,
+                    keys=row.names(res), 
+                    keytype="ENSEMBL",
+                    column="SYMBOL",
+                    multiVals="first")
+
+res$entrez = mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="ENTREZID",
+                    multiVals="first")
+
+res$name =   mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="GENENAME",
+                    multiVals="first")
+
+head(res, 10)
+```
+
+```{r}
+res = res[order(res$pvalue),]
+write.csv(res, file="deseq_results.csv")
+```
+
+### Pathway analysis
+
+```{r}
+#| warning: false
+#| message: false
+library(pathview)
+library(gage)
+library(gageData)
+
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+```
+
+```{r}
+kegg.sets.hs = kegg.sets.hs[sigmet.idx.hs]
+head(kegg.sets.hs, 3)
+```
+
+```{r}
+foldchanges = res$log2FoldChange
+names(foldchanges) = res$entrez
+head(foldchanges)
+```
+
+```{r}
+keggres = gage(foldchanges, gsets=kegg.sets.hs)
+attributes(keggres)
+```
+
+```{r}
+head(keggres$less)
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa04110")
+```
+![](hsa04110.pathview.png)
+
+```{r}
+# Top 5 upregulated pathways
+keggrespathways_up <- rownames(keggres$greater)[1:5]
+
+# Extract the 8 character long IDs part of each string
+keggresids_up = substr(keggrespathways_up, start=1, stop=8)
+keggresids_up
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id=keggresids_up, species="hsa")
+```
+
+![](hsa04640.pathview.png)
+
+![](hsa04630.pathview.png)
+
+![](hsa00140.pathview.png)
+
+![](hsa04142.pathview.png)
+
+![](hsa04330.pathview.png)
+
+```{r}
+# Top 5 downregulated pathways
+keggrespathways_down <- rownames(keggres$less)[1:5]
+
+# Extract the 8 character long IDs part of each string
+keggresids_down = substr(keggrespathways_down, start=1, stop=8)
+keggresids_down
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id=keggresids_down, species="hsa")
+```
+
+![](hsa04110.pathview.png)
+
+![](hsa03030.pathview.png)
+
+![](hsa03013.pathview.png)
+
+![](hsa03440.pathview.png)
+
+![](hsa04114.pathview.png)
+
+### Gene ontology
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchanges, gsets=gobpsets, same.dir=TRUE)
+
+lapply(gobpres, head)
+```
+
+### Reactome analysis
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+```
+
+```{r}
+write.table(sig_genes, 
+            file="significant_genes.txt", 
+            row.names=FALSE, 
+            col.names=FALSE, 
+            quote=FALSE)
+```
+
+Cell cycle, mitotic: it matches the previous KEGG result. Reactome analysis generates a more comprehensive analysis of enriched pathways than KEGG, and therefore returns a more detailed pathway.
+

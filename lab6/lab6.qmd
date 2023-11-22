@@ -1,0 +1,71 @@
+---
+title: "R Functions (lab 6)"
+author: Jazz Zhang (A16149005)
+format: pdf
+---
+
+## Functions in R
+3 element:
+  name();
+  arguments(input of function);
+  body
+
+### Function
+```{r}
+# Example input vectors to start with
+student1 <- c(100, 100, 100, 100, 100, 100, 100, 90)
+student2 <- c(100, NA, 90, 90, 90, 90, 97, 80)
+student3 <- c(90, NA, NA, NA, NA, NA, NA, NA)
+
+# calculate average of student1
+mean(student1)
+# convert NA to 0
+student1[is.na(student1)] <- 0
+# position of first lowest score
+which.min(student1)
+# drop lowest score
+student1[-which.min(student1)]
+
+# function to calculate mean score after dropping lowest
+avg <- function(grade){
+  # convert NA to 0
+  grade[is.na(grade)] <- 0
+  # calculate and print mean score after dropping lowest
+  print(mean(grade[-which.min(grade)]))
+}
+#test
+avg(student3)
+
+```
+
+
+```{r}
+# import grade book as df
+gradebook <- read.csv("https://tinyurl.com/gradeinput", row.names = 1)
+
+# calculate average for all students and homeworks
+stu_avg <- apply(gradebook, 1, avg)
+hw_avg <- apply(gradebook, 2, avg)
+```
+## lab 6 assignment
+#### Q2
+```{r}
+which.max(stu_avg)
+```
+Student 18 is the highest scoring student
+
+#### Q3
+```{r}
+which.min(hw_avg)
+```
+Homework 2 is the toughest
+
+#### Q4
+```{r}
+
+grade <- gradebook
+grade[is.na(grade)] <- 0
+which.max(abs(apply(grade, 2, cor, stu_avg)))
+```
+Homework 5 was most predictive
+

@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:6755/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jazz Zhang (A16149005)">
+
+<title>Class 5: Data Visualization (ggplot)</title>
+<style class="anchorjs"></style><style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="./Class 5_ Data Visualization (ggplot)_files/clipboard.min.js.download"></script>
+<script src="./Class 5_ Data Visualization (ggplot)_files/quarto.js.download"></script>
+<script src="./Class 5_ Data Visualization (ggplot)_files/popper.min.js.download"></script>
+<script src="./Class 5_ Data Visualization (ggplot)_files/tippy.umd.min.js.download"></script>
+<script src="./Class 5_ Data Visualization (ggplot)_files/anchor.min.js.download"></script>
+<link href="./Class 5_ Data Visualization (ggplot)_files/tippy.css" rel="stylesheet">
+<link href="./Class 5_ Data Visualization (ggplot)_files/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="./Class 5_ Data Visualization (ggplot)_files/bootstrap.min.js.download"></script>
+<link href="./Class 5_ Data Visualization (ggplot)_files/bootstrap-icons.css" rel="stylesheet">
+<link href="./Class 5_ Data Visualization (ggplot)_files/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 5: Data Visualization (ggplot)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jazz Zhang (A16149005) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="using-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="using-ggplot">Using GGPLOT<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6755/#using-ggplot" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+<p>To use ggplot2 we first need to install it on our computers. To do this we will use the function <code>install.packages()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="http://localhost:6755/#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="http://localhost:6755/#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="http://localhost:6755/#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  speed dist
+1     4    2
+2     4   10
+3     7    4
+4     7   22
+5     8   16
+6     9   10</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="http://localhost:6755/#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>ggplot: -data(data.frame for plotting) -aesthetics (aes() values - how to map data) -geom (type of plot)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="http://localhost:6755/#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cars)<span class="sc">+</span></span>
+<span id="cb7-2"><a href="http://localhost:6755/#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>speed, <span class="at">y=</span>dist)<span class="sc">+</span></span>
+<span id="cb7-3"><a href="http://localhost:6755/#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb7-4"><a href="http://localhost:6755/#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="http://localhost:6755/#cb9-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"</span></span>
+<span id="cb9-2"><a href="http://localhost:6755/#cb9-2" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(url)</span>
+<span id="cb9-3"><a href="http://localhost:6755/#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Gene Condition1 Condition2      State
+1      A4GNT -3.6808610 -3.4401355 unchanging
+2       AAAS  4.5479580  4.3864126 unchanging
+3      AASDH  3.7190695  3.4787276 unchanging
+4       AATF  5.0784720  5.0151916 unchanging
+5       AATK  0.4711421  0.5598642 unchanging
+6 AB015752.4 -3.6808610 -3.5921390 unchanging</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="http://localhost:6755/#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5196</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="http://localhost:6755/#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="http://localhost:6755/#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(genes<span class="sc">$</span>State)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      down unchanging         up 
+        72       4997        127 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="http://localhost:6755/#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fu">table</span>(genes<span class="sc">$</span>State)<span class="sc">/</span><span class="fu">nrow</span>(genes) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      down unchanging         up 
+      1.39      96.17       2.44 </code></pre>
+</div>
+</div>
+<p>5196 rows, 4 columns, 127 up-regulated genes, 2.44% up-regulated</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="http://localhost:6755/#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(genes) <span class="sc">+</span> </span>
+<span id="cb19-2"><a href="http://localhost:6755/#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Condition1, <span class="at">y=</span>Condition2) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="http://localhost:6755/#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="http://localhost:6755/#cb20-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(genes) <span class="sc">+</span> </span>
+<span id="cb20-2"><a href="http://localhost:6755/#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>Condition1, <span class="at">y=</span>Condition2, <span class="at">col=</span>State) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="http://localhost:6755/#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span>
+<span id="cb20-4"><a href="http://localhost:6755/#cb20-4" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="http://localhost:6755/#cb21-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> </span>
+<span id="cb21-2"><a href="http://localhost:6755/#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>( <span class="at">values=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"gray"</span>,<span class="st">"red"</span>) )<span class="sc">+</span></span>
+<span id="cb21-3"><a href="http://localhost:6755/#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Gene expression changes upon drug treatment"</span>, <span class="at">x=</span><span class="st">"Control (no Drug)"</span>, <span class="at">y=</span><span class="st">"Drug Treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="http://localhost:6755/#cb22-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"</span></span>
+<span id="cb22-2"><a href="http://localhost:6755/#cb22-2" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(url)</span>
+<span id="cb22-3"><a href="http://localhost:6755/#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="http://localhost:6755/#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="http://localhost:6755/#cb27-1" aria-hidden="true" tabindex="-1"></a>gapminder_2007 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>)</span>
+<span id="cb27-2"><a href="http://localhost:6755/#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder_2007)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      country continent year lifeExp      pop  gdpPercap
+1 Afghanistan      Asia 2007  43.828 31889923   974.5803
+2     Albania    Europe 2007  76.423  3600523  5937.0295
+3     Algeria    Africa 2007  72.301 33333216  6223.3675
+4      Angola    Africa 2007  42.731 12420476  4797.2313
+5   Argentina  Americas 2007  75.320 40301927 12779.3796
+6   Australia   Oceania 2007  81.235 20434176 34435.3674</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="http://localhost:6755/#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="http://localhost:6755/#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>gdpPercap, <span class="at">y=</span>lifeExp) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="http://localhost:6755/#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="http://localhost:6755/#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="http://localhost:6755/#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>gdpPercap, <span class="at">y=</span>lifeExp) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="http://localhost:6755/#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="http://localhost:6755/#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="http://localhost:6755/#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>gdpPercap, <span class="at">y=</span>lifeExp, <span class="at">color=</span>continent, <span class="at">size=</span>pop) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="http://localhost:6755/#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="http://localhost:6755/#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb32-2"><a href="http://localhost:6755/#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">color =</span> pop) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="http://localhost:6755/#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="http://localhost:6755/#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="http://localhost:6755/#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">size =</span> pop) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="http://localhost:6755/#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="http://localhost:6755/#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="http://localhost:6755/#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp,</span>
+<span id="cb34-3"><a href="http://localhost:6755/#cb34-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> pop), <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb34-4"><a href="http://localhost:6755/#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="http://localhost:6755/#cb35-1" aria-hidden="true" tabindex="-1"></a>gapminder_1957 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1957</span>)</span>
+<span id="cb35-2"><a href="http://localhost:6755/#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder_1957)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      country continent year lifeExp      pop gdpPercap
+1 Afghanistan      Asia 1957  30.332  9240934   820.853
+2     Albania    Europe 1957  59.280  1476505  1942.284
+3     Algeria    Africa 1957  45.685 10270856  3013.976
+4      Angola    Africa 1957  31.999  4561361  3827.940
+5   Argentina  Americas 1957  64.399 19610538  6856.856
+6   Australia   Oceania 1957  70.330  9712569 10949.650</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="http://localhost:6755/#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_1957) <span class="sc">+</span> </span>
+<span id="cb37-2"><a href="http://localhost:6755/#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">color =</span> continent, <span class="at">size =</span> pop) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="http://localhost:6755/#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span> </span>
+<span id="cb37-4"><a href="http://localhost:6755/#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="http://localhost:6755/#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="http://localhost:6755/#cb38-1" aria-hidden="true" tabindex="-1"></a>gapminder_1957_2007 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">1957</span> <span class="sc">|</span> year<span class="sc">==</span><span class="dv">2007</span>)</span>
+<span id="cb38-2"><a href="http://localhost:6755/#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder_1957_2007)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      country continent year lifeExp      pop gdpPercap
+1 Afghanistan      Asia 1957  30.332  9240934  820.8530
+2 Afghanistan      Asia 2007  43.828 31889923  974.5803
+3     Albania    Europe 1957  59.280  1476505 1942.2842
+4     Albania    Europe 2007  76.423  3600523 5937.0295
+5     Algeria    Africa 1957  45.685 10270856 3013.9760
+6     Algeria    Africa 2007  72.301 33333216 6223.3675</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="http://localhost:6755/#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_1957_2007) <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="http://localhost:6755/#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">color =</span> continent, <span class="at">size =</span> pop) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="http://localhost:6755/#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span> </span>
+<span id="cb40-4"><a href="http://localhost:6755/#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="http://localhost:6755/#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="http://localhost:6755/#cb41-1" aria-hidden="true" tabindex="-1"></a>gapminder_top5 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="http://localhost:6755/#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="http://localhost:6755/#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pop)) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href="http://localhost:6755/#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">5</span>, pop)</span>
+<span id="cb41-5"><a href="http://localhost:6755/#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="http://localhost:6755/#cb41-6" aria-hidden="true" tabindex="-1"></a>gapminder_top5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        country continent year lifeExp        pop gdpPercap
+1         China      Asia 2007  72.961 1318683096  4959.115
+2         India      Asia 2007  64.698 1110396331  2452.210
+3 United States  Americas 2007  78.242  301139947 42951.653
+4     Indonesia      Asia 2007  70.650  223547000  3540.652
+5        Brazil  Americas 2007  72.390  190010647  9065.801</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="http://localhost:6755/#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span> </span>
+<span id="cb43-2"><a href="http://localhost:6755/#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="http://localhost:6755/#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span> </span>
+<span id="cb44-2"><a href="http://localhost:6755/#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> continent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="http://localhost:6755/#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span> </span>
+<span id="cb45-2"><a href="http://localhost:6755/#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> lifeExp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="http://localhost:6755/#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="http://localhost:6755/#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>country, <span class="at">y=</span>pop, <span class="at">fill=</span>gdpPercap) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="http://localhost:6755/#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="http://localhost:6755/#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="http://localhost:6755/#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(country, <span class="sc">-</span>pop), <span class="at">y=</span>pop, <span class="at">fill=</span>gdpPercap) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="http://localhost:6755/#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="http://localhost:6755/#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="http://localhost:6755/#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(country, <span class="sc">-</span>pop), <span class="at">y=</span>pop, <span class="at">fill=</span>country) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="http://localhost:6755/#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">col=</span><span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="http://localhost:6755/#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill=</span><span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="http://localhost:6755/#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(USArrests)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Murder Assault UrbanPop Rape
+Alabama      13.2     236       58 21.2
+Alaska       10.0     263       48 44.5
+Arizona       8.1     294       80 31.0
+Arkansas      8.8     190       50 19.5
+California    9.0     276       91 40.6
+Colorado      7.9     204       78 38.7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="http://localhost:6755/#cb51-1" aria-hidden="true" tabindex="-1"></a>USArrests<span class="sc">$</span>State <span class="ot">&lt;-</span> <span class="fu">rownames</span>(USArrests)</span>
+<span id="cb51-2"><a href="http://localhost:6755/#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="http://localhost:6755/#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(USArrests) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="http://localhost:6755/#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(State,Murder), <span class="at">y=</span>Murder) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="http://localhost:6755/#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb51-6"><a href="http://localhost:6755/#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="http://localhost:6755/#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(USArrests) <span class="sc">+</span></span>
+<span id="cb52-2"><a href="http://localhost:6755/#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(State,Murder), <span class="at">y=</span>Murder) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="http://localhost:6755/#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb52-4"><a href="http://localhost:6755/#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>State, </span>
+<span id="cb52-5"><a href="http://localhost:6755/#cb52-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend=</span>State, </span>
+<span id="cb52-6"><a href="http://localhost:6755/#cb52-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y=</span><span class="dv">0</span>, </span>
+<span id="cb52-7"><a href="http://localhost:6755/#cb52-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend=</span>Murder), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb52-8"><a href="http://localhost:6755/#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="http://localhost:6755/#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gapminder' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'gapminder'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked _by_ '.GlobalEnv':
+
+    gapminder</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="http://localhost:6755/#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gganimate' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="http://localhost:6755/#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(gdpPercap, lifeExp, <span class="at">size =</span> pop, <span class="at">colour =</span> country)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="http://localhost:6755/#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="http://localhost:6755/#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> country_colors) <span class="sc">+</span></span>
+<span id="cb59-4"><a href="http://localhost:6755/#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb59-5"><a href="http://localhost:6755/#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb59-6"><a href="http://localhost:6755/#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>continent) <span class="sc">+</span></span>
+<span id="cb59-7"><a href="http://localhost:6755/#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gganimate</span></span>
+<span id="cb59-8"><a href="http://localhost:6755/#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Year: {frame_time}'</span>, <span class="at">x =</span> <span class="st">'GDP per capita'</span>, <span class="at">y =</span> <span class="st">'life expectancy'</span>) <span class="sc">+</span></span>
+<span id="cb59-9"><a href="http://localhost:6755/#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_time</span>(year) <span class="sc">+</span></span>
+<span id="cb59-10"><a href="http://localhost:6755/#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shadow_wake</span>(<span class="at">wake_length =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-27-1.gif" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="http://localhost:6755/#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'patchwork' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="http://localhost:6755/#cb62-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp))</span>
+<span id="cb62-2"><a href="http://localhost:6755/#cb62-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear))</span>
+<span id="cb62-3"><a href="http://localhost:6755/#cb62-3" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(disp, qsec))</span>
+<span id="cb62-4"><a href="http://localhost:6755/#cb62-4" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(carb))</span>
+<span id="cb62-5"><a href="http://localhost:6755/#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-6"><a href="http://localhost:6755/#cb62-6" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span> p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="./Class 5_ Data Visualization (ggplot)_files/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<div class="modal__dialog micromodal-slide" id="quarto-log-error-modal" aria-hidden="true">
+  <div class="modal__overlay" tabindex="2" data-micromodal-close="">
+    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="quarto-log-error-modal-title">
+      <header class="modal__header">
+        <h2 class="modal__title" id="quarto-log-error-modal-title">
+          <i class="bi bi-exclamation-circle"></i>Error
+        </h2>
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close=""></button>
+      </header>
+      <div class="modal__content" id="quarto-log-error-modal-content">
+        <pre tabindex="1" id="quarto-log-error-display"></pre>
+      </div>
+      <footer class="modal__footer">
+      </footer>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+#quarto-log-error-modal .modal__overlay {
+  z-index: 5000;
+}
+#quarto-log-error-modal-content {
+  border: 1px solid #dee2e6;
+  overflow-y: auto;
+}
+#quarto-log-error-display {
+  min-height: 100px;
+  padding: 8px;
+  margin-bottom: 0;
+  font-family: monospace;
+}
+#quarto-log-error-display:focus {
+  outline: none;
+}
+.modal__dialog {
+  font-size: 16px;
+}
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__container {
+  position: fixed;
+  top: 80px;
+  background-color: #fff;
+  padding: 15px;
+  padding-top: 10px;
+  min-width: 500px;
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  border-bottom: none;
+  padding-bottom: 10px;
+  font-size: 20px;
+  color: rgb(191,71,65);
+  line-height: 1.25;
+  box-sizing: border-box;
+}
+.modal__title .bi {
+  margin-right: 7px;
+}
+.modal__close {
+  background: transparent;
+  border: 0;
+  margin-bottom: 10px;
+}
+.modal__header .modal__close:before { content: "\2715"; }
+.modal__content {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+@keyframes mmfadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+@keyframes mmfadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+@keyframes mmslideIn {
+  from { transform: translateY(15%); }
+    to { transform: translateY(0); }
+}
+@keyframes mmslideOut {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10%); }
+}
+.micromodal-slide {
+  display: none;
+}
+.micromodal-slide.is-open {
+  display: block;
+}
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+  animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+.micromodal-slide[aria-hidden="false"] .modal__container {
+  animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+  animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+.micromodal-slide[aria-hidden="true"] .modal__container {
+  animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+} 
+</style>
+<script type="text/javascript">
+  window.backupDefine = window.define; window.define = undefined;
+  /*  ansi_up.js
+   *  author : Dru Nelson
+   *  license : MIT
+   *  http://github.com/drudru/ansi_up
+   */
+   (function (root, factory) {
+      if (typeof define === 'function' && define.amd) {
+          // AMD. Register as an anonymous module.
+          define(['exports'], factory);
+      } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
+          // CommonJS
+          factory(exports);
+      } else {
+          // Browser globals
+          var exp = {};
+          factory(exp);
+          root.AnsiUp = exp.default;
+      }
+  }(this, function (exports) {
+  "use strict";
+  var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+      if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+      return cooked;
+  };
+  var PacketKind;
+  (function (PacketKind) {
+      PacketKind[PacketKind["EOS"] = 0] = "EOS";
+      PacketKind[PacketKind["Text"] = 1] = "Text";
+      PacketKind[PacketKind["Incomplete"] = 2] = "Incomplete";
+      PacketKind[PacketKind["ESC"] = 3] = "ESC";
+      PacketKind[PacketKind["Unknown"] = 4] = "Unknown";
+      PacketKind[PacketKind["SGR"] = 5] = "SGR";
+      PacketKind[PacketKind["OSCURL"] = 6] = "OSCURL";
+  })(PacketKind || (PacketKind = {}));
+  var AnsiUp = (function () {
+      function AnsiUp() {
+          this.VERSION = "5.1.0";
+          this.setup_palettes();
+          this._use_classes = false;
+          this.bold = false;
+          this.italic = false;
+          this.underline = false;
+          this.fg = this.bg = null;
+          this._buffer = '';
+          this._url_whitelist = { 'http': 1, 'https': 1 };
+      }
+      Object.defineProperty(AnsiUp.prototype, "use_classes", {
+          get: function () {
+              return this._use_classes;
+          },
+          set: function (arg) {
+              this._use_classes = arg;
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(AnsiUp.prototype, "url_whitelist", {
+          get: function () {
+              return this._url_whitelist;
+          },
+          set: function (arg) {
+              this._url_whitelist = arg;
+          },
+          enumerable: false,
+          configurable: true
+      });
+      AnsiUp.prototype.setup_palettes = function () {
+          var _this = this;
+          this.ansi_colors =
+              [
+                  [
+                      { rgb: [0, 0, 0], class_name: "ansi-black" },
+                      { rgb: [187, 0, 0], class_name: "ansi-red" },
+                      { rgb: [0, 187, 0], class_name: "ansi-green" },
+                      { rgb: [187, 187, 0], class_name: "ansi-yellow" },
+                      { rgb: [0, 0, 187], class_name: "ansi-blue" },
+                      { rgb: [187, 0, 187], class_name: "ansi-magenta" },
+                      { rgb: [0, 187, 187], class_name: "ansi-cyan" },
+                      { rgb: [255, 255, 255], class_name: "ansi-white" }
+                  ],
+                  [
+                      { rgb: [85, 85, 85], class_name: "ansi-bright-black" },
+                      { rgb: [255, 85, 85], class_name: "ansi-bright-red" },
+                      { rgb: [0, 255, 0], class_name: "ansi-bright-green" },
+                      { rgb: [255, 255, 85], class_name: "ansi-bright-yellow" },
+                      { rgb: [85, 85, 255], class_name: "ansi-bright-blue" },
+                      { rgb: [255, 85, 255], class_name: "ansi-bright-magenta" },
+                      { rgb: [85, 255, 255], class_name: "ansi-bright-cyan" },
+                      { rgb: [255, 255, 255], class_name: "ansi-bright-white" }
+                  ]
+              ];
+          this.palette_256 = [];
+          this.ansi_colors.forEach(function (palette) {
+              palette.forEach(function (rec) {
+                  _this.palette_256.push(rec);
+              });
+          });
+          var levels = [0, 95, 135, 175, 215, 255];
+          for (var r = 0; r < 6; ++r) {
+              for (var g = 0; g < 6; ++g) {
+                  for (var b = 0; b < 6; ++b) {
+                      var col = { rgb: [levels[r], levels[g], levels[b]], class_name: 'truecolor' };
+                      this.palette_256.push(col);
+                  }
+              }
+          }
+          var grey_level = 8;
+          for (var i = 0; i < 24; ++i, grey_level += 10) {
+              var gry = { rgb: [grey_level, grey_level, grey_level], class_name: 'truecolor' };
+              this.palette_256.push(gry);
+          }
+      };
+      AnsiUp.prototype.escape_txt_for_html = function (txt) {
+          return txt.replace(/[&<>"']/gm, function (str) {
+              if (str === "&")
+                  return "&amp;";
+              if (str === "<")
+                  return "&lt;";
+              if (str === ">")
+                  return "&gt;";
+              if (str === "\"")
+                  return "&quot;";
+              if (str === "'")
+                  return "&#x27;";
+          });
+      };
+      AnsiUp.prototype.append_buffer = function (txt) {
+          var str = this._buffer + txt;
+          this._buffer = str;
+      };
+      AnsiUp.prototype.get_next_packet = function () {
+          var pkt = {
+              kind: PacketKind.EOS,
+              text: '',
+              url: ''
+          };
+          var len = this._buffer.length;
+          if (len == 0)
+              return pkt;
+          var pos = this._buffer.indexOf("\x1B");
+          if (pos == -1) {
+              pkt.kind = PacketKind.Text;
+              pkt.text = this._buffer;
+              this._buffer = '';
+              return pkt;
+          }
+          if (pos > 0) {
+              pkt.kind = PacketKind.Text;
+              pkt.text = this._buffer.slice(0, pos);
+              this._buffer = this._buffer.slice(pos);
+              return pkt;
+          }
+          if (pos == 0) {
+              if (len == 1) {
+                  pkt.kind = PacketKind.Incomplete;
+                  return pkt;
+              }
+              var next_char = this._buffer.charAt(1);
+              if ((next_char != '[') && (next_char != ']')) {
+                  pkt.kind = PacketKind.ESC;
+                  pkt.text = this._buffer.slice(0, 1);
+                  this._buffer = this._buffer.slice(1);
+                  return pkt;
+              }
+              if (next_char == '[') {
+                  if (!this._csi_regex) {
+                      this._csi_regex = rgx(__makeTemplateObject(["\n                        ^                           # beginning of line\n                                                    #\n                                                    # First attempt\n                        (?:                         # legal sequence\n                          \u001B[                      # CSI\n                          ([<-?]?)              # private-mode char\n                          ([d;]*)                    # any digits or semicolons\n                          ([ -/]?               # an intermediate modifier\n                          [@-~])                # the command\n                        )\n                        |                           # alternate (second attempt)\n                        (?:                         # illegal sequence\n                          \u001B[                      # CSI\n                          [ -~]*                # anything legal\n                          ([\0-\u001F:])              # anything illegal\n                        )\n                    "], ["\n                        ^                           # beginning of line\n                                                    #\n                                                    # First attempt\n                        (?:                         # legal sequence\n                          \\x1b\\[                      # CSI\n                          ([\\x3c-\\x3f]?)              # private-mode char\n                          ([\\d;]*)                    # any digits or semicolons\n                          ([\\x20-\\x2f]?               # an intermediate modifier\n                          [\\x40-\\x7e])                # the command\n                        )\n                        |                           # alternate (second attempt)\n                        (?:                         # illegal sequence\n                          \\x1b\\[                      # CSI\n                          [\\x20-\\x7e]*                # anything legal\n                          ([\\x00-\\x1f:])              # anything illegal\n                        )\n                    "]));
+                  }
+                  var match = this._buffer.match(this._csi_regex);
+                  if (match === null) {
+                      pkt.kind = PacketKind.Incomplete;
+                      return pkt;
+                  }
+                  if (match[4]) {
+                      pkt.kind = PacketKind.ESC;
+                      pkt.text = this._buffer.slice(0, 1);
+                      this._buffer = this._buffer.slice(1);
+                      return pkt;
+                  }
+                  if ((match[1] != '') || (match[3] != 'm'))
+                      pkt.kind = PacketKind.Unknown;
+                  else
+                      pkt.kind = PacketKind.SGR;
+                  pkt.text = match[2];
+                  var rpos = match[0].length;
+                  this._buffer = this._buffer.slice(rpos);
+                  return pkt;
+              }
+              if (next_char == ']') {
+                  if (len < 4) {
+                      pkt.kind = PacketKind.Incomplete;
+                      return pkt;
+                  }
+                  if ((this._buffer.charAt(2) != '8')
+                      || (this._buffer.charAt(3) != ';')) {
+                      pkt.kind = PacketKind.ESC;
+                      pkt.text = this._buffer.slice(0, 1);
+                      this._buffer = this._buffer.slice(1);
+                      return pkt;
+                  }
+                  if (!this._osc_st) {
+                      this._osc_st = rgxG(__makeTemplateObject(["\n                        (?:                         # legal sequence\n                          (\u001B\\)                    # ESC                           |                           # alternate\n                          (\u0007)                      # BEL (what xterm did)\n                        )\n                        |                           # alternate (second attempt)\n                        (                           # illegal sequence\n                          [\0-\u0006]                 # anything illegal\n                          |                           # alternate\n                          [\b-\u001A]                 # anything illegal\n                          |                           # alternate\n                          [\u001C-\u001F]                 # anything illegal\n                        )\n                    "], ["\n                        (?:                         # legal sequence\n                          (\\x1b\\\\)                    # ESC \\\n                          |                           # alternate\n                          (\\x07)                      # BEL (what xterm did)\n                        )\n                        |                           # alternate (second attempt)\n                        (                           # illegal sequence\n                          [\\x00-\\x06]                 # anything illegal\n                          |                           # alternate\n                          [\\x08-\\x1a]                 # anything illegal\n                          |                           # alternate\n                          [\\x1c-\\x1f]                 # anything illegal\n                        )\n                    "]));
+                  }
+                  this._osc_st.lastIndex = 0;
+                  {
+                      var match_1 = this._osc_st.exec(this._buffer);
+                      if (match_1 === null) {
+                          pkt.kind = PacketKind.Incomplete;
+                          return pkt;
+                      }
+                      if (match_1[3]) {
+                          pkt.kind = PacketKind.ESC;
+                          pkt.text = this._buffer.slice(0, 1);
+                          this._buffer = this._buffer.slice(1);
+                          return pkt;
+                      }
+                  }
+                  {
+                      var match_2 = this._osc_st.exec(this._buffer);
+                      if (match_2 === null) {
+                          pkt.kind = PacketKind.Incomplete;
+                          return pkt;
+                      }
+                      if (match_2[3]) {
+                          pkt.kind = PacketKind.ESC;
+                          pkt.text = this._buffer.slice(0, 1);
+                          this._buffer = this._buffer.slice(1);
+                          return pkt;
+                      }
+                  }
+                  if (!this._osc_regex) {
+                      this._osc_regex = rgx(__makeTemplateObject(["\n                        ^                           # beginning of line\n                                                    #\n                        \u001B]8;                    # OSC Hyperlink\n                        [ -:<-~]*       # params (excluding ;)\n                        ;                           # end of params\n                        ([!-~]{0,512})        # URL capture\n                        (?:                         # ST\n                          (?:\u001B\\)                  # ESC                           |                           # alternate\n                          (?:\u0007)                    # BEL (what xterm did)\n                        )\n                        ([ -~]+)              # TEXT capture\n                        \u001B]8;;                   # OSC Hyperlink End\n                        (?:                         # ST\n                          (?:\u001B\\)                  # ESC                           |                           # alternate\n                          (?:\u0007)                    # BEL (what xterm did)\n                        )\n                    "], ["\n                        ^                           # beginning of line\n                                                    #\n                        \\x1b\\]8;                    # OSC Hyperlink\n                        [\\x20-\\x3a\\x3c-\\x7e]*       # params (excluding ;)\n                        ;                           # end of params\n                        ([\\x21-\\x7e]{0,512})        # URL capture\n                        (?:                         # ST\n                          (?:\\x1b\\\\)                  # ESC \\\n                          |                           # alternate\n                          (?:\\x07)                    # BEL (what xterm did)\n                        )\n                        ([\\x20-\\x7e]+)              # TEXT capture\n                        \\x1b\\]8;;                   # OSC Hyperlink End\n                        (?:                         # ST\n                          (?:\\x1b\\\\)                  # ESC \\\n                          |                           # alternate\n                          (?:\\x07)                    # BEL (what xterm did)\n                        )\n                    "]));
+                  }
+                  var match = this._buffer.match(this._osc_regex);
+                  if (match === null) {
+                      pkt.kind = PacketKind.ESC;
+                      pkt.text = this._buffer.slice(0, 1);
+                      this._buffer = this._buffer.slice(1);
+                      return pkt;
+                  }
+                  pkt.kind = PacketKind.OSCURL;
+                  pkt.url = match[1];
+                  pkt.text = match[2];
+                  var rpos = match[0].length;
+                  this._buffer = this._buffer.slice(rpos);
+                  return pkt;
+              }
+          }
+      };
+      AnsiUp.prototype.ansi_to_html = function (txt) {
+          this.append_buffer(txt);
+          var blocks = [];
+          while (true) {
+              var packet = this.get_next_packet();
+              if ((packet.kind == PacketKind.EOS)
+                  || (packet.kind == PacketKind.Incomplete))
+                  break;
+              if ((packet.kind == PacketKind.ESC)
+                  || (packet.kind == PacketKind.Unknown))
+                  continue;
+              if (packet.kind == PacketKind.Text)
+                  blocks.push(this.transform_to_html(this.with_state(packet)));
+              else if (packet.kind == PacketKind.SGR)
+                  this.process_ansi(packet);
+              else if (packet.kind == PacketKind.OSCURL)
+                  blocks.push(this.process_hyperlink(packet));
+          }
+          return blocks.join("");
+      };
+      AnsiUp.prototype.with_state = function (pkt) {
+          return { bold: this.bold, italic: this.italic, underline: this.underline, fg: this.fg, bg: this.bg, text: pkt.text };
+      };
+      AnsiUp.prototype.process_ansi = function (pkt) {
+          var sgr_cmds = pkt.text.split(';');
+          while (sgr_cmds.length > 0) {
+              var sgr_cmd_str = sgr_cmds.shift();
+              var num = parseInt(sgr_cmd_str, 10);
+              if (isNaN(num) || num === 0) {
+                  this.fg = this.bg = null;
+                  this.bold = false;
+                  this.italic = false;
+                  this.underline = false;
+              }
+              else if (num === 1) {
+                  this.bold = true;
+              }
+              else if (num === 3) {
+                  this.italic = true;
+              }
+              else if (num === 4) {
+                  this.underline = true;
+              }
+              else if (num === 22) {
+                  this.bold = false;
+              }
+              else if (num === 23) {
+                  this.italic = false;
+              }
+              else if (num === 24) {
+                  this.underline = false;
+              }
+              else if (num === 39) {
+                  this.fg = null;
+              }
+              else if (num === 49) {
+                  this.bg = null;
+              }
+              else if ((num >= 30) && (num < 38)) {
+                  this.fg = this.ansi_colors[0][(num - 30)];
+              }
+              else if ((num >= 40) && (num < 48)) {
+                  this.bg = this.ansi_colors[0][(num - 40)];
+              }
+              else if ((num >= 90) && (num < 98)) {
+                  this.fg = this.ansi_colors[1][(num - 90)];
+              }
+              else if ((num >= 100) && (num < 108)) {
+                  this.bg = this.ansi_colors[1][(num - 100)];
+              }
+              else if (num === 38 || num === 48) {
+                  if (sgr_cmds.length > 0) {
+                      var is_foreground = (num === 38);
+                      var mode_cmd = sgr_cmds.shift();
+                      if (mode_cmd === '5' && sgr_cmds.length > 0) {
+                          var palette_index = parseInt(sgr_cmds.shift(), 10);
+                          if (palette_index >= 0 && palette_index <= 255) {
+                              if (is_foreground)
+                                  this.fg = this.palette_256[palette_index];
+                              else
+                                  this.bg = this.palette_256[palette_index];
+                          }
+                      }
+                      if (mode_cmd === '2' && sgr_cmds.length > 2) {
+                          var r = parseInt(sgr_cmds.shift(), 10);
+                          var g = parseInt(sgr_cmds.shift(), 10);
+                          var b = parseInt(sgr_cmds.shift(), 10);
+                          if ((r >= 0 && r <= 255) && (g >= 0 && g <= 255) && (b >= 0 && b <= 255)) {
+                              var c = { rgb: [r, g, b], class_name: 'truecolor' };
+                              if (is_foreground)
+                                  this.fg = c;
+                              else
+                                  this.bg = c;
+                          }
+                      }
+                  }
+              }
+          }
+      };
+      AnsiUp.prototype.transform_to_html = function (fragment) {
+          var txt = fragment.text;
+          if (txt.length === 0)
+              return txt;
+          txt = this.escape_txt_for_html(txt);
+          if (!fragment.bold && !fragment.italic && !fragment.underline && fragment.fg === null && fragment.bg === null)
+              return txt;
+          var styles = [];
+          var classes = [];
+          var fg = fragment.fg;
+          var bg = fragment.bg;
+          if (fragment.bold)
+              styles.push('font-weight:bold');
+          if (fragment.italic)
+              styles.push('font-style:italic');
+          if (fragment.underline)
+              styles.push('text-decoration:underline');
+          if (!this._use_classes) {
+              if (fg)
+                  styles.push("color:rgb(" + fg.rgb.join(',') + ")");
+              if (bg)
+                  styles.push("background-color:rgb(" + bg.rgb + ")");
+          }
+          else {
+              if (fg) {
+                  if (fg.class_name !== 'truecolor') {
+                      classes.push(fg.class_name + "-fg");
+                  }
+                  else {
+                      styles.push("color:rgb(" + fg.rgb.join(',') + ")");
+                  }
+              }
+              if (bg) {
+                  if (bg.class_name !== 'truecolor') {
+                      classes.push(bg.class_name + "-bg");
+                  }
+                  else {
+                      styles.push("background-color:rgb(" + bg.rgb.join(',') + ")");
+                  }
+              }
+          }
+          var class_string = '';
+          var style_string = '';
+          if (classes.length)
+              class_string = " class=\"" + classes.join(' ') + "\"";
+          if (styles.length)
+              style_string = " style=\"" + styles.join(';') + "\"";
+          return "<span" + style_string + class_string + ">" + txt + "</span>";
+      };
+      ;
+      AnsiUp.prototype.process_hyperlink = function (pkt) {
+          var parts = pkt.url.split(':');
+          if (parts.length < 1)
+              return '';
+          if (!this._url_whitelist[parts[0]])
+              return '';
+          var result = "<a href=\"" + this.escape_txt_for_html(pkt.url) + "\">" + this.escape_txt_for_html(pkt.text) + "</a>";
+          return result;
+      };
+      return AnsiUp;
+  }());
+  function rgx(tmplObj) {
+      var subst = [];
+      for (var _i = 1; _i < arguments.length; _i++) {
+          subst[_i - 1] = arguments[_i];
+      }
+      var regexText = tmplObj.raw[0];
+      var wsrgx = /^\s+|\s+\n|\s*#[\s\S]*?\n|\n/gm;
+      var txt2 = regexText.replace(wsrgx, '');
+      return new RegExp(txt2);
+  }
+  function rgxG(tmplObj) {
+      var subst = [];
+      for (var _i = 1; _i < arguments.length; _i++) {
+          subst[_i - 1] = arguments[_i];
+      }
+      var regexText = tmplObj.raw[0];
+      var wsrgx = /^\s+|\s+\n|\s*#[\s\S]*?\n|\n/gm;
+      var txt2 = regexText.replace(wsrgx, '');
+      return new RegExp(txt2, 'g');
+  }
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.default = AnsiUp;
+  }));
+  // micromodal: https://github.com/Ghosh/micromodal
+  !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).MicroModal=t()}(this,(function(){"use strict";function e(e,t){for(var o=0;o<t.length;o++){var n=t[o];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function t(e){return function(e){if(Array.isArray(e))return o(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(!e)return;if("string"==typeof e)return o(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return o(e,t)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function o(e,t){(null==t||t>e.length)&&(t=e.length);for(var o=0,n=new Array(t);o<t;o++)n[o]=e[o];return n}var n,i,a,r,s,l=(n=["a[href]","area[href]",'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',"select:not([disabled]):not([aria-hidden])","textarea:not([disabled]):not([aria-hidden])","button:not([disabled]):not([aria-hidden])","iframe","object","embed","[contenteditable]",'[tabindex]:not([tabindex^="-"])'],i=function(){function o(e){var n=e.targetModal,i=e.triggers,a=void 0===i?[]:i,r=e.onShow,s=void 0===r?function(){}:r,l=e.onClose,c=void 0===l?function(){}:l,d=e.openTrigger,u=void 0===d?"data-micromodal-trigger":d,f=e.closeTrigger,h=void 0===f?"data-micromodal-close":f,v=e.openClass,g=void 0===v?"is-open":v,m=e.disableScroll,b=void 0!==m&&m,y=e.disableFocus,p=void 0!==y&&y,w=e.awaitCloseAnimation,E=void 0!==w&&w,k=e.awaitOpenAnimation,M=void 0!==k&&k,A=e.debugMode,C=void 0!==A&&A;!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,o),this.modal=document.getElementById(n),this.config={debugMode:C,disableScroll:b,openTrigger:u,closeTrigger:h,openClass:g,onShow:s,onClose:c,awaitCloseAnimation:E,awaitOpenAnimation:M,disableFocus:p},a.length>0&&this.registerTriggers.apply(this,t(a)),this.onClick=this.onClick.bind(this),this.onKeydown=this.onKeydown.bind(this)}var i,a,r;return i=o,(a=[{key:"registerTriggers",value:function(){for(var e=this,t=arguments.length,o=new Array(t),n=0;n<t;n++)o[n]=arguments[n];o.filter(Boolean).forEach((function(t){t.addEventListener("click",(function(t){return e.showModal(t)}))}))}},{key:"showModal",value:function(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;if(this.activeElement=document.activeElement,this.modal.setAttribute("aria-hidden","false"),this.modal.classList.add(this.config.openClass),this.scrollBehaviour("disable"),this.addEventListeners(),this.config.awaitOpenAnimation){var o=function t(){e.modal.removeEventListener("animationend",t,!1),e.setFocusToFirstNode()};this.modal.addEventListener("animationend",o,!1)}else this.setFocusToFirstNode();this.config.onShow(this.modal,this.activeElement,t)}},{key:"closeModal",value:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,t=this.modal;if(this.modal.setAttribute("aria-hidden","true"),this.removeEventListeners(),this.scrollBehaviour("enable"),this.activeElement&&this.activeElement.focus&&this.activeElement.focus(),this.config.onClose(this.modal,this.activeElement,e),this.config.awaitCloseAnimation){var o=this.config.openClass;this.modal.addEventListener("animationend",(function e(){t.classList.remove(o),t.removeEventListener("animationend",e,!1)}),!1)}else t.classList.remove(this.config.openClass)}},{key:"closeModalById",value:function(e){this.modal=document.getElementById(e),this.modal&&this.closeModal()}},{key:"scrollBehaviour",value:function(e){if(this.config.disableScroll){var t=document.querySelector("body");switch(e){case"enable":Object.assign(t.style,{overflow:""});break;case"disable":Object.assign(t.style,{overflow:"hidden"})}}}},{key:"addEventListeners",value:function(){this.modal.addEventListener("touchstart",this.onClick),this.modal.addEventListener("click",this.onClick),document.addEventListener("keydown",this.onKeydown)}},{key:"removeEventListeners",value:function(){this.modal.removeEventListener("touchstart",this.onClick),this.modal.removeEventListener("click",this.onClick),document.removeEventListener("keydown",this.onKeydown)}},{key:"onClick",value:function(e){(e.target.hasAttribute(this.config.closeTrigger)||e.target.parentNode.hasAttribute(this.config.closeTrigger))&&(e.preventDefault(),e.stopPropagation(),this.closeModal(e))}},{key:"onKeydown",value:function(e){27===e.keyCode&&this.closeModal(e),9===e.keyCode&&this.retainFocus(e)}},{key:"getFocusableNodes",value:function(){var e=this.modal.querySelectorAll(n);return Array.apply(void 0,t(e))}},{key:"setFocusToFirstNode",value:function(){var e=this;if(!this.config.disableFocus){var t=this.getFocusableNodes();if(0!==t.length){var o=t.filter((function(t){return!t.hasAttribute(e.config.closeTrigger)}));o.length>0&&o[0].focus(),0===o.length&&t[0].focus()}}}},{key:"retainFocus",value:function(e){var t=this.getFocusableNodes();if(0!==t.length)if(t=t.filter((function(e){return null!==e.offsetParent})),this.modal.contains(document.activeElement)){var o=t.indexOf(document.activeElement);e.shiftKey&&0===o&&(t[t.length-1].focus(),e.preventDefault()),!e.shiftKey&&t.length>0&&o===t.length-1&&(t[0].focus(),e.preventDefault())}else t[0].focus()}}])&&e(i.prototype,a),r&&e(i,r),o}(),a=null,r=function(e){if(!document.getElementById(e))return console.warn("MicroModal: ❗Seems like you have missed %c'".concat(e,"'"),"background-color: #f8f9fa;color: #50596c;font-weight: bold;","ID somewhere in your code. Refer example below to resolve it."),console.warn("%cExample:","background-color: #f8f9fa;color: #50596c;font-weight: bold;",'<div class="modal" id="'.concat(e,'"></div>')),!1},s=function(e,t){if(function(e){e.length<=0&&(console.warn("MicroModal: ❗Please specify at least one %c'micromodal-trigger'","background-color: #f8f9fa;color: #50596c;font-weight: bold;","data attribute."),console.warn("%cExample:","background-color: #f8f9fa;color: #50596c;font-weight: bold;",'<a href="#" data-micromodal-trigger="my-modal"></a>'))}(e),!t)return!0;for(var o in t)r(o);return!0},{init:function(e){var o=Object.assign({},{openTrigger:"data-micromodal-trigger"},e),n=t(document.querySelectorAll("[".concat(o.openTrigger,"]"))),r=function(e,t){var o=[];return e.forEach((function(e){var n=e.attributes[t].value;void 0===o[n]&&(o[n]=[]),o[n].push(e)})),o}(n,o.openTrigger);if(!0!==o.debugMode||!1!==s(n,r))for(var l in r){var c=r[l];o.targetModal=l,o.triggers=t(c),a=new i(o)}},show:function(e,t){var o=t||{};o.targetModal=e,!0===o.debugMode&&!1===r(e)||(a&&a.removeEventListeners(),(a=new i(o)).showModal())},close:function(e){e?a.closeModalById(e):a.closeModal()}});return"undefined"!=typeof window&&(window.MicroModal=l),l}));  
+  window.define = window.backupDefine; window.backupDefine = undefined;
+  </script>
+<script type="text/javascript">
+  (function () {
+    // forward keydown events so shortcuts can work in vscode, see:
+    // https://github.com/microsoft/vscode/issues/65452#issuecomment-586485815
+    if (window.parent.postMessage) {
+      window.document.addEventListener('keydown', e => {
+        const event = {
+          type: "keydown",
+          data: {
+            altKey: e.altKey,
+            code: e.code,
+            ctrlKey: e.ctrlKey,
+            isComposing: e.isComposing,
+            key: e.key,
+            location: e.location,
+            metaKey: e.metaKey,
+            repeat: e.repeat,
+            shiftKey: e.shiftKey
+          }
+        };
+        window.parent.postMessage(event, '*');
+      });
+    }
+    // listen for execCommand messages
+    window.addEventListener("message", function (event) {
+      if (event.data.type === "devhost-exec-command") {
+        window.document.execCommand(event.data.data);
+      } 
+    }, true);
+    const logEntries = new Array(1000);
+    logEntries.offset = 0;
+    function recordLogEntry(entry) {
+      logEntries[logEntries.offset++] = entry;
+      logEntries.offset %= logEntries.length;
+    }
+    function getLogEntry(i) { // backwards, 0 is most recent
+        return logEntries[(logEntries.offset - 1 - i + logEntries.length) % logEntries.length];
+    }
+    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    let path = window.location.pathname;
+    if (!/\/$/.test(path)) path += "/";
+    const devServerSocket = new WebSocket(protocol + "//" + window.location.host + path);
+    let reloadPage = true;
+    addEventListener("beforeunload", () => {
+      // don't reload page in case of navigation events
+      reloadPage = false;
+    })
+    devServerSocket.onopen = () => {
+      console.log('Socket connection open. Listening for events.');
+      // if the socket closes for any reason (e.g. this occurs in electron apps
+      // when the computer suspends) then reload to reestablish the connection 
+      devServerSocket.onclose = () => {
+        if (reloadPage) {
+          console.log('Socket connection closed. Reloading.');
+          window.location.reload(true);
+        }
+      }
+    };
+    // append for errors that occur within the error window
+    let lastError = 0;
+    const kErrorWindow = 2500;
+    function showError(msg) {
+      const ansiUp = new AnsiUp
+      const html = ansiUp.ansi_to_html(msg.trim());
+      const display = document.getElementById("quarto-log-error-display");
+      if (display.innerHTML && ((Date.now() - lastError) < kErrorWindow)) {
+        display.innerHTML = display.innerHTML + "<br/>" +  html;
+      } else {
+        display.innerHTML = html
+      }
+      lastError = Date.now()
+      MicroModal.show('quarto-log-error-modal', {
+        awaitCloseAnimation: true,
+        onClose: () => { display.innerHTML = ""; }
+      });
+      // post message to parent indicating we had an error
+      if (window.parent.postMessage) {
+        window.parent.postMessage({
+          type: "error",
+          msg: msg,
+        }, "*");
+      }
+    }
+    // see if there is already an error to show
+    const renderError = document.getElementById("quarto-render-error");
+    if (renderError) {
+      showError(renderError.innerHTML.trim());
+    }
+    const normalizeTarget = (target) => {
+      return target.replace(/\/index\.html/, "/")
+    };
+    devServerSocket.onmessage = (msg) => {
+      if (msg.data.startsWith('reload')) {
+        let target = normalizeTarget(msg.data.replace(/^reload/, ""));
+        // prepend proxy path to target if we have one
+        if (target) {
+          const pathPrefix = 
+            window.location.pathname.match(/^.*?\/p\/\w+\//) ||
+            window.location.pathname.match(/^.*?\/user\/[\w\d]+\/proxy\/\d+\//);
+          if (pathPrefix) {
+            target = pathPrefix + target.slice(1);
+          }
+        }
+        if (target && (target !== normalizeTarget(window.location.pathname))) {
+          window.location.replace(target);
+        } else {
+          window.location.reload(true);
+        }
+      } else if (msg.data.startsWith('log:')) {
+        const ansiUp = new AnsiUp
+        const log = JSON.parse(msg.data.substr(4));
+        recordLogEntry(log);
+        if (log.levelName === "ERROR") {
+          showError(log.msgFormatted)
+        } else {
+          // see if there is a knitr error to report
+          const kExecutionHalted = "Execution halted";
+          if (log.msg.indexOf(kExecutionHalted) !== -1) {
+            // scan backwards for beginning of error
+            const errorEntries = [getLogEntry(0).msgFormatted];
+            for (let i=1; i<logEntries.length; i++) {
+              const logEntry = getLogEntry(i);
+              if (logEntry) {
+                errorEntries.unshift(logEntry.msgFormatted);
+                if (logEntry.msg.indexOf("Quitting from lines") !== -1) {
+                  showError(errorEntries.join(""));
+                  break;
+                } else if (logEntry.msg.indexOf(kExecutionHalted) !== -1) {
+                  break;
+                }
+              } else {
+                break;
+              }
+            }
+          }
+        }
+      }
+    };
+  })();
+</script>
+
+<script type="text/javascript">
+  if (window.parent.postMessage) {
+    // wait for message providing confirmation we are in a devhost
+    window.addEventListener("message", function (event) {
+      if (event.data.type === "devhost-init") {
+        window.quartoDevhost = {
+          openInputFile: function (line, column, highlight) {
+            window.parent.postMessage({
+              type: "openfile",
+              file: "C:\Users\jz644\OneDrive\桌面\UCSD\BGGN_213\lab5\lab5.qmd",
+              line: line,
+              column: column,
+              highlight: highlight
+            }, event.origin);
+          }
+        };
+      } else if (event.data.type === "goback") {
+        window.history.back()
+      } else if (event.data.type === "goforward") {
+        window.history.forward()
+      }
+    }, true);
+    // notify host of navigation (e.g. for 'pop out' command)
+    window.parent.postMessage({
+      type: "navigate",
+      href: window.location.href,
+      file: "C:\Users\jz644\OneDrive\桌面\UCSD\BGGN_213\lab5\lab5.qmd"
+    }, "*");
+  }
+</script>
+
+<script type="text/javascript">
+(function() {
+  var origin = "http://localhost:6755";
+  var search = "?capabilities=1&amp;host=http%3A%2F%2F127.0.0.1%3A20661";
+  function isLocalHref(href) {
+    return href.startsWith(origin);
+  }
+  function ensureLinkOpensInNewWindow(linkEl) {
+    var useOpenExternalMessage =
+      search.includes("quartoPreviewReqId=") &&
+      window.parent.postMessage;
+    if (useOpenExternalMessage) {
+      linkEl.addEventListener("click", function(event) {
+        window.parent.postMessage({
+          type: "openExternal",
+          url: linkEl.href,
+        }, "*");
+        event.preventDefault();
+        return false;
+      });
+    }
+    var isRStudio = search.includes("capabilities=");
+    if (isRStudio) {
+      linkEl.target = "_blank";
+    }
+  }
+  function initialize() {
+    // only do this if we are in an iframe
+    try {
+      if (window.self === window.top) {
+        return;
+      }
+    // added during rc phase of v1.2 -- don't allow
+    // unexpected exceptions to derail the feature
+    } catch {
+      return;
+    }
+    var linkEls = document.getElementsByTagName("a");
+    for (var linkEl of linkEls) {
+      if (linkEl.href && !isLocalHref(linkEl.href)) {
+        ensureLinkOpensInNewWindow(linkEl);
+      }
+    }
+  }
+  initialize();
+})();
+</script>
+</body></html>
