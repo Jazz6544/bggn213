@@ -1,0 +1,25 @@
+---
+title: "Lab 17 Unix"
+author: "Jazz Zhang (A16149005)"
+format: html
+---
+
+```{r}
+zebrafish <- read.table("mm-second.x.zebrafish.tsv", col.names=c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore"))
+
+hist(zebrafish$bitscore, breaks=30)
+```
+
+```{r}
+plot(zebrafish$pident  * (zebrafish$qend - zebrafish$qstart), zebrafish$bitscore)
+```
+
+```{r}
+library(ggplot2)
+ggplot(zebrafish, aes(pident, bitscore)) + geom_point(alpha=0.1) 
+```
+
+```{r}
+ggplot(zebrafish, aes((zebrafish$pident * (zebrafish$qend - zebrafish$qstart)), bitscore)) + geom_point(alpha=0.1) + geom_smooth()
+```
+
